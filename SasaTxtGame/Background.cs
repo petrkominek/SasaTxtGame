@@ -10,7 +10,7 @@ namespace SasaTxtGame
         char[,] arr = new char[100, 100];
 
         public Background() {
-            string[] lines = System.IO.File.ReadAllLines(@"C:\Users\D046041\source\repos\SasaGame\SasaGame\GameMap.txt");
+            string[] lines = System.IO.File.ReadAllLines(@"c:\Users\D046041\source\repos\GitProjects\SasaTxtGame\SasaTxtGame\GameMap.txt");
             int x = 0;
             int y = 0;
             foreach (string line in lines)
@@ -34,8 +34,8 @@ namespace SasaTxtGame
 
             switch (valueFromMap)
               {
-                 case '|': answer = "you hit the wall. Can't move"; break;
-                 case '-': answer = "you hit the wall. Can't move"; break;
+                 case '|': answer = "return|you hit the wall. Can't move"; break;
+                 case '-': answer = "return|you hit the wall. Can't move"; break;
               }
 
             if (valueFromMap.ToString() == "|" | valueFromMap.ToString() == "-") {

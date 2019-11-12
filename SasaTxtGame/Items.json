@@ -1,18 +1,30 @@
 ﻿[
   {
-    "name": "EE",
+    "key": "EE",
+    "name": "Begin",
     "description": "Stranger! Welcome in the game. The goal of the game is to find an exit. For now unfortunately it's dark, you can't see anything. We wish you good luck!...actually not. you will die here! XOXOXO",
     "status": "Door is open",
     "status_param": "bool|true",
     "stepout": "status_param:false|status:Door is closed and can't be opened"
-    
+      
+
   },
   {
-    "name": "MM",
+    "key": "MM",
+    "name": "Matches",
     "description": "You have found matches!",
     "status": "You have {0} matches to use",
     "status_param": "int|10",
     "command": "light"
+  },
+  {
+    "key": "D1",
+    "name": "Doors",
+    "description": "You are front of a door",
+    "status": "Door is unlocked",
+    "status_param": "bool|true",
+    "command": "yy|open"
+
   }
 ]
   
