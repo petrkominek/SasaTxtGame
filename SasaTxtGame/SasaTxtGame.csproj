@@ -36,4 +36,8 @@
     </None>
   </ItemGroup>
 
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="xcopy /y $(ProjectDir)*.txt  $(ProjectDir)$(OutDir)&#xD;&#xA;xcopy /y $(ProjectDir)Items.json  $(ProjectDir)$(OutDir)" />
+  </Target>
+
 </Project>

@@ -1,0 +1,16 @@
+﻿forward-w
+backward-s                 
+left-a                    
+right-d                    
+take-take (to take items inside shelfs and matches)
+inventory-i (to look into your inventory)                    
+light-l (to light your matches to show a radius of 6 blocks around you)                    
+open-open (to open dors and shelfs) 
+unlock-unlock (to open a locked door) 
+jump-j (to jump over a hole)
+map-m (please don't use it, it is concidered more like a cheat for testing)
+
+                    
+
+
+                   

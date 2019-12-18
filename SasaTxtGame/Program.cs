@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Configuration;
+//using Microsoft.Extensions.Configuration;
 
 namespace SasaTxtGame
 {
@@ -16,11 +17,12 @@ namespace SasaTxtGame
         {
             me = new Persona();
             me.x = 3;
+            me.y = 0;
             bgMap = new Background();
-            mapItems = new MapItems(@"c:\Users\D046041\source\repos\GitProjects\SasaTxtGame\SasaTxtGame\Items.json");
+            mapItems = new MapItems(@"Items.json");
             Console.WriteLine("Hello My friend what's your nick!");
             me.Name = Console.ReadLine();
-            commands = new Commands(me);
+            commands = new Commands(me, mapItems);
             
             string command = string.Empty;
             while (command != "end")
@@ -35,30 +37,46 @@ namespace SasaTxtGame
                     case "backward": commands.GoBackward(); yy = true; break;
                     case "left": commands.GoLeft(); xx=false ; break;
                     case "right": commands.GoRight(); xx=true ; break;
-                    case "w": commands.GoForward(); yy = true; break;
-                    case "s": commands.GoBackward(); yy = false; break;
+                    case "s": commands.GoForward(); yy = true; break;
+                    case "w": commands.GoBackward(); yy = false; break;
                     case "a": commands.GoLeft(); yy = false; break;
                     case "d": commands.GoRight(); yy = true; break;
+                    case "m": commands.GetMap(); break;
+                    case "map": commands.GetMap();  break;
                     case "status": GetStatus();  break;
+                    case "take": commands.TakeItem(); break;
+                    case "inventory": commands.ItemList(); break;
+                    case "i": commands.ItemList(); break;
+                    case "light": commands.Light(); break;
+                    case "l": commands.Light(); break;
 
 
                     case "help": PrintMessage(commands.Help()); break;
-                    default: CheckCommand(command); break;
+                    default: commands.CheckCommand(command); break;
                 }
                 string kolize = ControlPosition();
                 if (kolize != string.Empty)
                 {
-                    if (kolize.StartsWith("return"))
+                    if (kolize.ToLower().StartsWith("return"))
                     {
                         me.x = oldX;
                         me.y = oldY;
+                        PrintMessage(kolize.Replace("Return|",string.Empty));
                     }
-                    PrintMessage(kolize);
+                    //PrintMessage(kolize);
                     Item item = mapItems.GetItem(kolize);
                     if (item != null)
                     {
                         PrintMessage(mapItems.GetItem(kolize).Description);
+                        if (item.Command == "start")
+                        {
+                            me.x = 3;
+                            me.y = 0;
+                            Console.WriteLine(string.Format("{0} you are starting from the beginning", me.Name));
+
+                        }
                     }
+
                 }
                 PrintMessage(string.Format("You are at {0}:{1}", me.x, me.y));
             }
@@ -88,43 +106,6 @@ namespace SasaTxtGame
             }
         }
 
-        static void CheckCommand(string command)
-        {
-            string kolize = ControlPosition();
-            if (kolize != string.Empty)
-            {
-
-                Item item = mapItems.GetItem(kolize);
-                if (item != null)
-                {
-                    if (item.Command.Contains(command))
-                    {
-                        string[] comm = item.Command.Split('|');
-                        if (comm[0] == "yy") {
-                            if (yy)
-                            {
-                                me.y++;
-                            }
-                            else {
-                                me.y--;
-                            }
-                        }
-                        if (comm[0] == "xx")
-                        {
-                            if (xx)
-                            {
-                                me.x++;
-                            }
-                            else
-                            {
-                                me.x--;
-                            }
-                        }
-
-
-                    }
-                }
-            }
-        }
+       
     }
 }

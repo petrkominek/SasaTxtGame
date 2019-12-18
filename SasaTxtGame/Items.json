@@ -2,20 +2,22 @@
   {
     "key": "EE",
     "name": "Begin",
-    "description": "Stranger! Welcome in the game. The goal of the game is to find an exit. For now unfortunately it's dark, you can't see anything. We wish you good luck!...actually not. you will die here! XOXOXO",
+    "description": "Stranger! Welcome to the dungeon. The goal of the game is to find an exit, but beware of traps and holes. For you unfortunately it's dark so you can't see anything. We wish you good luck!...actually not. Hope you will die here! XOXOXO",
     "status": "Door is open",
     "status_param": "bool|true",
-    "stepout": "status_param:false|status:Door is closed and can't be opened"
-      
+    "stepout": "status_param:false|status:Door is closed and can't be opened",
+    "command": "na",
+    "can_pass": true
 
   },
   {
     "key": "MM",
     "name": "Matches",
-    "description": "You have found matches!",
+    "description": "You have found matches! Do you want to take them?",
     "status": "You have {0} matches to use",
     "status_param": "int|10",
-    "command": "light"
+    "command": "take",
+    "can_pass": false
   },
   {
     "key": "D1",
@@ -23,8 +25,122 @@
     "description": "You are front of a door",
     "status": "Door is unlocked",
     "status_param": "bool|true",
-    "command": "yy|open"
+    "command": "open",
+    "can_pass": false,
+    "pass_direction": "x"
+
+  },
+  {
+    "key": "D2",
+    "name": "Doors",
+    "description": "You are front of a door",
+    "status": "Door is unlocked",
+    "status_param": "bool|true",
+    "command": "open",
+    "can_pass": false,
+    "pass_direction": "y"
+
+  },
+  {
+    "key": "ZD",
+    "name": "Guarded door",
+    "description": "You are in front of a door that is guarded by a Spinx: \n''For many centuries have i guarded this door, if you answer my riddle than i'll let you pass, but if you fail i will devour you like the many others''.\n The riddle is: ''What is the creature that walks on four legs in the morning, two legs in the noon and three in the evening''?",
+    "status": "Congratulation you pass|Wrong! now you must die",
+    "status_param": "deadly",
+    "command": "man|human",
+    "can_pass": false,
+    "pass_direction": "y"
+  },
+  {
+    "key": "S1",
+    "name": "Shelf",
+    "description": "You are in front of a shelf, you want to have a look in it?",
+    "status": "Shelf is unlocked",
+    "status_param": "bool|true",
+    "command": "open",
+    "can_pass": false,
+    "pass_direction": "Inside is a yellow key - would you like to take it?",
+    "subitem": {
+      "key": "k1",
+      "name": "Yellow key",
+      "command": "take"
+    }
+
+
+  },
+  {
+    "key": "S2",
+    "name": "Shelf",
+    "description": "You are in front of a shelf, you want to have a look in it?",
+    "status": "Shelf is unlocked",
+    "status_param": "bool|true",
+    "command": "open",
+    "can_pass": false,
+    "pass_direction": "Inside is a red key - would you like to take it?",
+    "subitem": {
+      "key": "k2",
+      "name": "Red key",
+      "command": "take"
+    }
+  },
+  {
+    "key": "S3",
+    "name": "Shelf",
+    "description": "You are in front of a shelf, you want to have a look in it?",
+    "status": "Shelf is unlocked",
+    "status_param": "bool|true",
+    "command": "open",
+    "can_pass": false,
+    "pass_direction": "Inside is a blue key - would you like to take it?",
+    "subitem": {
+      "key": "k3",
+      "name": "Blue key",
+      "command": "take"
+    }
+  },
+  {
+    "key": "O",
+    "name": "Hole",
+    "description": "You have fallen into a hole. Sudendly you died, the last thing you hear is a loud ugh!",
+    "status": "A hole is a hole",
+    "status_param": "bool|true",
+    "command": "start",
+    "can_pass": false,
+    "pass_direction": "You died!"
+
+  },
+  {
+    "key": "EX",
+    "name": "Exit",
+    "description": "Front of you is big door with three key holes. Do you want to unlock the door?",
+    "status": "The doors are locked",
+    "status_param": "bool|true",
+    "command": "unlock",
+    "can_pass": false,
+    "pass_direction": "y"
+
+  },
+  {
+    "key": "KK",
+    "name": "End",
+    "description": "Thank you for playing my game, I really hope you liked it.\nSaša Komínek",
+    "status": "na",
+    "status_param": "bool|true",
+    "command": "end",
+    "can_pass": false,
+    "pass_direction": "na"
+
+  },
+  {
+    "key": "OO",
+    "name": "Holes",
+    "description": "You are front of a hole",
+    "status": "na",
+    "status_param": "bool|true",
+    "command": "jump|j",
+    "can_pass": false,
+    "pass_direction": "y"
 
   }
 ]
-  
+ 

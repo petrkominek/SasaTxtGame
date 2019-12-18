@@ -24,32 +24,46 @@ namespace SasaTxtGame
 
                 foreach (JObject o in a.Children<JObject>())
                 {
-                    Item item = new Item();
-                    string kkey = "";
-                    foreach (JProperty p in o.Properties())
-                    {
-
-                        string key = p.Name;
-                        string value = (string)p.Value;
-                        
-                        switch (key) {
-                            case "key": kkey = value; break;
-                            case "name": item.Name = value; break;
-                            case "description": item.Description = value; break;
-                            case "status": item.Status = value; break;
-                            case "status_param": item.StatusParam = value; break;
-
-                        }
-
-                        
-                    }
-
-                    dict.Add(kkey, item);
+                    Item item = ParseItem(o);
+                    dict.Add(item.Key, item);
                 }
 
 
             }
-        } 
+        }
+
+        private Item ParseItem(JObject o) {
+
+            Item item = new Item();
+            
+            foreach (JProperty p in o.Properties())
+            {
+
+                string key = p.Name;
+                //string value = (string)p.Value;
+
+                switch (key)
+                {
+                    case "key": item.Key = (string)p.Value; break;
+                    case "name": item.Name = (string)p.Value; break;
+                    case "description": item.Description = (string)p.Value; break;
+                    case "status": item.Status = (string)p.Value; break;
+                    case "status_param": item.StatusParam = (string)p.Value; break;
+                    case "can_pass": item.CanPass = bool.Parse((string)p.Value); break;
+                    case "pass_direction": item.Direction = (string)p.Value; break;
+                    case "command": item.Command = (string)p.Value;  break;
+                    case "subitem": item.subitem = ParseItem((JObject)p.Value);
+
+
+                        break;
+
+                }
+
+
+            }
+
+            return item;
+        }
 
         public Item GetItem(string key){
             if (dict.ContainsKey(key))
@@ -57,6 +71,14 @@ namespace SasaTxtGame
                 return dict[key];
             }
             return null;
+        }
+        public void RemoveItem(string key)
+        {
+            if (dict.ContainsKey(key))
+            {
+                dict.Remove(key);
+            }
+          
         }
     }
 }
